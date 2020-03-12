@@ -1,0 +1,32 @@
+
+-----前置動作---------
+1.爬蟲來源網:https://www.jinse.com/lives
+2.F12點選Network
+3.此頁面會有API:https://api.jinse.com/v4/live/list?limit=20&reading=false&source=web&sort=&flag=down&id=0
+4.此段為爬蟲需用到的網址
+-----套件---------
+1.使用Node v10.15.3 Npm 6.4.1作為開發環境
+2.npm install request cheerio --save (爬蟲套件)
+3.npm install express --save (server框架)
+4.npm install moment --save  (時間套件)
+5.npm install mysql --save  (實現SQL交互)
+6.npm install pkg     (打包工具)
+-----流程---------
+1.設置每1分鐘啟動getSelenium事件
+2.先進行時間參數宣告
+3.對爬蟲來源網址請求，得之body為我們從API上擷取到的資料
+4.迴圈方式逐筆將資料篩選出來並塞入Obj中
+5.對DB請求連線，進行Insert動作，若失敗則紀錄log檔
+6.使用MySQL5.7版本，使用insert update語法，如果有資料就修改，若無資料則新增。
+-----DB 欄位---------
+1.ID:序號 PKey
+2.Title:主旨
+3.Content:內容
+4.CreatUsr:創建者
+5.CreatDate:創建日期
+6.up_counts:好評數
+7.down_counts:壞評數
+8.status:狀態(暫時無用到)
+9.source:來源 1為金色財經
+10.link:來源API網址
+11.dateat:來源API發佈時間
